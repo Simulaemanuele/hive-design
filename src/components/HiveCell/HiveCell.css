@@ -8,3 +8,11 @@
 .hive-tile:hover {
   transform: scale(1.2);
 }
+
+.text-wrapper {
+  display: flex; /* Flexbox per centrare verticalmente */
+  flex-direction: column;
+  justify-content: center; /* Centra orizzontalmente */
+  align-items: center; /* Centra verticalmente */
+  height: 100%; /* Assicura che il contenitore occupi tutta l'altezza */
+}
