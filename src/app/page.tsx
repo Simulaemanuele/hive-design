@@ -6,8 +6,6 @@ import { useState } from "react";
 export default function Home() {
   const [visible, setVisible] = useState<boolean>(true);
 
-  console.log("visible: ", visible);
-
   return (
     <div>
       <h1
@@ -25,7 +23,7 @@ export default function Home() {
         }}
       >
         <HiveCell
-          dimension="20rem"
+          dimension={20}
           type="logo-menu"
           textContent=""
           backgroundVariant={false}
@@ -33,39 +31,38 @@ export default function Home() {
           hoverable={true}
         />
         <HiveCell
-          dimension="20rem"
+          dimension={20}
           type="menu-tile"
           textContent="Web App"
           backgroundVariant={false}
           hoverable={true}
         />
         <HiveCell
-          dimension="20rem"
+          dimension={20}
           type="menu-tile"
           textContent="TextContent 2"
           backgroundVariant={true}
           hoverable={true}
         />
         <HiveCell
-          dimension="20rem"
+          dimension={20}
           type="menu-tile"
           textContent="TEST"
           backgroundVariant={true}
           hoverable={true}
         />
         <HiveCell
-          dimension="20rem"
+          dimension={20}
           type=""
           textContent=""
           backgroundVariant={true}
           rotate={true}
           rotationValue="-30deg"
-          styleCustom={{ transform: "rotate(30deg)" }}
           children={<div onClick={() => console.log("TEST")}>Press me</div>}
           hoverable={true}
         />
         <HiveCell
-          dimension="20rem"
+          dimension={20}
           type="exit"
           textContent=""
           backgroundVariant={false}

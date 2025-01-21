@@ -39,7 +39,7 @@ const HiveCell = memo(
     children,
     hoverable,
   }: {
-    dimension: string;
+    dimension: number;
     type: string;
     textContent: string;
     backgroundVariant: boolean;
@@ -81,6 +81,13 @@ const HiveCell = memo(
       );
     };
 
+    const dimensionRatio = (dimension: number): number => {
+      const part = 2.679;
+      const percentage = (part / dimension) * 100;
+      const resultRatio = dimension - dimension * (percentage / 100);
+      return resultRatio;
+    };
+
     const renderContent = () => {
       if (Object.values(typeConfig).includes(type)) {
         switch (type) {
@@ -118,30 +125,22 @@ const HiveCell = memo(
     };
 
     const baseStyle = {
-      width: dimension,
+      width: `${rotate ? dimension : dimensionRatio(dimension)}rem`,
       display: "flex",
       justifyContent: "center",
       alignItems: "center",
       cursor: "pointer",
       backgroundColor: backgroundVariant ? "#975f00" : "#ffcb73",
-      transform: rotate
-        ? `rotate(${rotationValue})`
-        : isHover
-        ? "scale(1.2)"
-        : isHover && rotate
-        ? `rotate(${rotationValue}) scale(1.2)`
-        : undefined,
+      transform: isHover ? `scale(1.2)` : undefined,
+      transitionDuration: hoverable ? "1s" : "",
       fontSize: "3.125rem",
     };
 
     return (
       <div
-        className={`hexagon`}
+        className={`${rotate ? "hexagon-variant" : "hexagon"}`}
         style={baseStyle}
-        onMouseEnter={() => {
-          setIsHover(true);
-          console.log("isHover: ", isHover);
-        }}
+        onMouseEnter={() => setIsHover(true)}
         onMouseLeave={() => setIsHover(false)}
       >
         {renderContent()}
