@@ -26,7 +26,6 @@ export default function Home() {
           dimension={20}
           type="logo-menu"
           textContent=""
-          backgroundVariant={false}
           setVisible={setVisible}
           hoverable={true}
         />
@@ -34,28 +33,31 @@ export default function Home() {
           dimension={20}
           type="menu-tile"
           textContent="Web App"
-          backgroundVariant={false}
           hoverable={true}
         />
         <HiveCell
           dimension={20}
           type="menu-tile"
           textContent="TextContent 2"
-          backgroundVariant={true}
           hoverable={true}
         />
         <HiveCell
           dimension={20}
           type="menu-tile"
           textContent="TEST"
-          backgroundVariant={true}
+          hoverable={true}
+        />
+        <HiveCell
+          dimension={20}
+          type="menu-tile"
+          textContent="TEST"
+          outerStyleCustom={{ backgroundColor: "blueviolet" }}
           hoverable={true}
         />
         <HiveCell
           dimension={20}
           type=""
           textContent=""
-          backgroundVariant={true}
           rotate={true}
           rotationValue="-30deg"
           children={<div onClick={() => console.log("TEST")}>Press me</div>}
@@ -65,7 +67,6 @@ export default function Home() {
           dimension={20}
           type="exit"
           textContent=""
-          backgroundVariant={false}
           setVisible={setVisible}
           hoverable={true}
         />

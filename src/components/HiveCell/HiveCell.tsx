@@ -31,22 +31,22 @@ const HiveCell = memo(
     dimension,
     type,
     textContent,
-    backgroundVariant,
     rotate,
     rotationValue,
     setVisible,
-    styleCustom,
+    innerStyleCustom,
+    outerStyleCustom,
     children,
     hoverable,
   }: {
     dimension: number;
     type: string;
     textContent: string;
-    backgroundVariant: boolean;
     rotate?: boolean;
     rotationValue?: string;
     setVisible?: Dispatch<SetStateAction<boolean>>;
-    styleCustom?: React.CSSProperties;
+    innerStyleCustom?: React.CSSProperties;
+    outerStyleCustom?: React.CSSProperties;
     children?: ReactNode;
     hoverable?: boolean;
   }) => {
@@ -93,7 +93,7 @@ const HiveCell = memo(
         switch (type) {
           case "logo-menu":
             return (
-              <div onClick={handleVisibleMenu} style={styleCustom}>
+              <div onClick={handleVisibleMenu} style={innerStyleCustom}>
                 <Image priority src={mainLogo} alt="main logo" />
               </div>
             );
@@ -103,7 +103,7 @@ const HiveCell = memo(
               <div
                 onClick={() => handleNavigation(textContent)}
                 className="text-wrapper"
-                style={styleCustom}
+                style={innerStyleCustom}
               >
                 {composeRendererText(renderText(textContent))}
               </div>
@@ -111,7 +111,7 @@ const HiveCell = memo(
 
           case "exit":
             return (
-              <div onClick={handleVisibleMenu} style={styleCustom}>
+              <div onClick={handleVisibleMenu} style={innerStyleCustom}>
                 <Image priority src={exitIcon} alt="exit icon" />
               </div>
             );
@@ -120,7 +120,7 @@ const HiveCell = memo(
             return null;
         }
       } else {
-        return <div style={styleCustom}>{children}</div>;
+        return <div style={innerStyleCustom}>{children}</div>;
       }
     };
 
@@ -130,10 +130,10 @@ const HiveCell = memo(
       justifyContent: "center",
       alignItems: "center",
       cursor: "pointer",
-      backgroundColor: backgroundVariant ? "#975f00" : "#ffcb73",
-      transform: isHover ? `scale(1.2)` : undefined,
+      transform: isHover ? `scale(1.1)` : undefined,
       transitionDuration: hoverable ? "1s" : "",
       fontSize: "3.125rem",
+      ...outerStyleCustom,
     };
 
     return (
