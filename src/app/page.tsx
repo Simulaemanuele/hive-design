@@ -30,24 +30,28 @@ export default function Home() {
           textContent=""
           backgroundVariant={false}
           setVisible={setVisible}
+          hoverable={true}
         />
         <HiveCell
           dimension="20rem"
           type="menu-tile"
           textContent="Web App"
           backgroundVariant={false}
+          hoverable={true}
         />
         <HiveCell
           dimension="20rem"
           type="menu-tile"
           textContent="TextContent 2"
           backgroundVariant={true}
+          hoverable={true}
         />
         <HiveCell
           dimension="20rem"
           type="menu-tile"
           textContent="TEST"
           backgroundVariant={true}
+          hoverable={true}
         />
         <HiveCell
           dimension="20rem"
@@ -57,9 +61,8 @@ export default function Home() {
           rotate={true}
           rotationValue="-30deg"
           styleCustom={{ transform: "rotate(30deg)" }}
-          children={
-            <button onClick={() => console.log("TEST")}>Press me</button>
-          }
+          children={<div onClick={() => console.log("TEST")}>Press me</div>}
+          hoverable={true}
         />
         <HiveCell
           dimension="20rem"
@@ -67,6 +70,7 @@ export default function Home() {
           textContent=""
           backgroundVariant={false}
           setVisible={setVisible}
+          hoverable={true}
         />
       </div>
     </div>

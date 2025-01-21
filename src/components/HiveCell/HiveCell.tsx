@@ -6,6 +6,7 @@ import React, {
   memo,
   ReactNode,
   SetStateAction,
+  useState,
 } from "react";
 import "@/components/HiveCell/HiveCell.css";
 import Image from "next/image";
@@ -36,6 +37,7 @@ const HiveCell = memo(
     setVisible,
     styleCustom,
     children,
+    hoverable,
   }: {
     dimension: string;
     type: string;
@@ -46,8 +48,11 @@ const HiveCell = memo(
     setVisible?: Dispatch<SetStateAction<boolean>>;
     styleCustom?: React.CSSProperties;
     children?: ReactNode;
+    hoverable?: boolean;
   }) => {
     const router = useRouter();
+
+    const [isHover, setIsHover] = useState<boolean>(false);
 
     const handleNavigation = (menuText: string): void => {
       router.push(`/${menuText}`);
@@ -119,14 +124,25 @@ const HiveCell = memo(
       alignItems: "center",
       cursor: "pointer",
       backgroundColor: backgroundVariant ? "#975f00" : "#ffcb73",
-      transform: rotate ? `rotate(${rotationValue})` : undefined,
+      transform: rotate
+        ? `rotate(${rotationValue})`
+        : isHover
+        ? "scale(1.2)"
+        : isHover && rotate
+        ? `rotate(${rotationValue}) scale(1.2)`
+        : undefined,
       fontSize: "3.125rem",
     };
 
     return (
       <div
-        className={`hexagon ${type === typeConfig.menuTile ? "hive-tile" : ""}`}
+        className={`hexagon`}
         style={baseStyle}
+        onMouseEnter={() => {
+          setIsHover(true);
+          console.log("isHover: ", isHover);
+        }}
+        onMouseLeave={() => setIsHover(false)}
       >
         {renderContent()}
       </div>

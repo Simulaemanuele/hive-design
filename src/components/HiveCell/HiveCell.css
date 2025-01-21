@@ -1,18 +1,17 @@
 .hexagon {
   background-color: #ffcb73;
   aspect-ratio: cos(30deg);
-  /* clip-path: polygon(50% -50%, 100% 50%, 50% 150%, 0 50%); */
   clip-path: polygon(-50% 50%, 50% 100%, 150% 50%, 50% 0);
 }
 
-.hive-tile:hover {
+.hoverStatus:hover {
   transform: scale(1.2);
 }
 
 .text-wrapper {
-  display: flex; /* Flexbox per centrare verticalmente */
+  display: flex;
   flex-direction: column;
-  justify-content: center; /* Centra orizzontalmente */
-  align-items: center; /* Centra verticalmente */
-  height: 100%; /* Assicura che il contenitore occupi tutta l'altezza */
+  justify-content: center;
+  align-items: center;
+  height: 100%;
 }
