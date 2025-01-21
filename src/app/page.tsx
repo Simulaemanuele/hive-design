@@ -56,6 +56,7 @@ export default function Home() {
           backgroundVariant={true}
           rotate={true}
           rotationValue="-30deg"
+          styleCustom={{ transform: "rotate(30deg)" }}
           children={
             <button onClick={() => console.log("TEST")}>Press me</button>
           }

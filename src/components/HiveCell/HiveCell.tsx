@@ -34,6 +34,7 @@ const HiveCell = memo(
     rotate,
     rotationValue,
     setVisible,
+    styleCustom,
     children,
   }: {
     dimension: string;
@@ -43,6 +44,7 @@ const HiveCell = memo(
     rotate?: boolean;
     rotationValue?: string;
     setVisible?: Dispatch<SetStateAction<boolean>>;
+    styleCustom?: React.CSSProperties;
     children?: ReactNode;
   }) => {
     const router = useRouter();
@@ -79,7 +81,7 @@ const HiveCell = memo(
         switch (type) {
           case "logo-menu":
             return (
-              <div onClick={handleVisibleMenu}>
+              <div onClick={handleVisibleMenu} style={styleCustom}>
                 <Image priority src={mainLogo} alt="main logo" />
               </div>
             );
@@ -89,6 +91,7 @@ const HiveCell = memo(
               <div
                 onClick={() => handleNavigation(textContent)}
                 className="text-wrapper"
+                style={styleCustom}
               >
                 {composeRendererText(renderText(textContent))}
               </div>
@@ -96,7 +99,7 @@ const HiveCell = memo(
 
           case "exit":
             return (
-              <div onClick={handleVisibleMenu}>
+              <div onClick={handleVisibleMenu} style={styleCustom}>
                 <Image priority src={exitIcon} alt="exit icon" />
               </div>
             );
@@ -105,7 +108,7 @@ const HiveCell = memo(
             return null;
         }
       } else {
-        return <div>{children}</div>;
+        return <div style={styleCustom}>{children}</div>;
       }
     };
 
