@@ -46,6 +46,7 @@ export default function Home() {
           type="menu-tile"
           textContent="TEST"
           hoverable={true}
+          customHandler={() => alert("Test")}
         />
         <HiveCell
           dimension={20}

@@ -38,6 +38,7 @@ const HiveCell = memo(
     outerStyleCustom,
     children,
     hoverable,
+    customHandler,
   }: {
     dimension: number;
     type: string;
@@ -49,6 +50,7 @@ const HiveCell = memo(
     outerStyleCustom?: React.CSSProperties;
     children?: ReactNode;
     hoverable?: boolean;
+    customHandler?: (...args: any[]) => any;
   }) => {
     const router = useRouter();
 
@@ -60,6 +62,18 @@ const HiveCell = memo(
 
     const handleVisibleMenu = () => {
       if (setVisible) setVisible(type === typeConfig.logoMenu ? true : false);
+    };
+
+    const handleAction = () => {
+      if (customHandler) {
+        customHandler();
+      } else {
+        if (type === typeConfig.menuTile) {
+          handleNavigation(textContent);
+        } else if (type === typeConfig.logoMenu || type === typeConfig.exit) {
+          handleVisibleMenu();
+        }
+      }
     };
 
     const renderText = (text: string): string[] => {
@@ -93,7 +107,7 @@ const HiveCell = memo(
         switch (type) {
           case "logo-menu":
             return (
-              <div onClick={handleVisibleMenu} style={innerStyleCustom}>
+              <div onClick={handleAction} style={innerStyleCustom}>
                 <Image priority src={mainLogo} alt="main logo" />
               </div>
             );
@@ -101,7 +115,7 @@ const HiveCell = memo(
           case "menu-tile":
             return (
               <div
-                onClick={() => handleNavigation(textContent)}
+                onClick={handleAction}
                 className="text-wrapper"
                 style={innerStyleCustom}
               >
@@ -111,7 +125,7 @@ const HiveCell = memo(
 
           case "exit":
             return (
-              <div onClick={handleVisibleMenu} style={innerStyleCustom}>
+              <div onClick={handleAction} style={innerStyleCustom}>
                 <Image priority src={exitIcon} alt="exit icon" />
               </div>
             );
