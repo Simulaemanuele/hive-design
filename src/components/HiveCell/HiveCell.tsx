@@ -1,7 +1,6 @@
 "use client";
 
 import React, {
-  Children,
   Dispatch,
   memo,
   ReactNode,
@@ -102,6 +101,11 @@ const HiveCell = memo(
       return resultRatio;
     };
 
+    const calculateFontSize = (dimension: number): string => {
+      const baseFontSize = 1;
+      return `${baseFontSize * (dimension / 10)}rem`;
+    };
+
     const renderContent = () => {
       if (Object.values(typeConfig).includes(type)) {
         switch (type) {
@@ -146,7 +150,7 @@ const HiveCell = memo(
       cursor: "pointer",
       transform: isHover ? `scale(1.1)` : undefined,
       transitionDuration: hoverable ? "1s" : "",
-      fontSize: "3.125rem",
+      fontSize: calculateFontSize(dimension),
       ...outerStyleCustom,
     };
 

@@ -33,12 +33,14 @@ export default function Home() {
           dimension={20}
           type="menu-tile"
           textContent="Web App"
+          innerStyleCustom={{ fontSize: "3.125rem" }}
           hoverable={true}
         />
         <HiveCell
-          dimension={20}
+          dimension={10}
           type="menu-tile"
           textContent="TextContent 2"
+          innerStyleCustom={{ fontSize: "1.3rem" }}
           hoverable={true}
         />
         <HiveCell
