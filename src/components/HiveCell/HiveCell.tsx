@@ -149,7 +149,7 @@ const HiveCell = memo(
       alignItems: "center",
       cursor: "pointer",
       transform: isHover ? `scale(1.1)` : undefined,
-      transitionDuration: hoverable ? "1s" : "",
+      transitionDuration: isHover ? "1s" : "",
       fontSize: calculateFontSize(dimension),
       ...outerStyleCustom,
     };
@@ -158,8 +158,8 @@ const HiveCell = memo(
       <div
         className={`${rotate ? "hexagon-variant" : "hexagon"}`}
         style={baseStyle}
-        onMouseEnter={() => setIsHover(true)}
-        onMouseLeave={() => setIsHover(false)}
+        onMouseEnter={() => (hoverable ? setIsHover(true) : null)}
+        onMouseLeave={() => (hoverable ? setIsHover(false) : null)}
       >
         {renderContent()}
       </div>
