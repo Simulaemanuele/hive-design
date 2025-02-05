@@ -76,7 +76,7 @@ export default function Home() {
       >
         Design System
       </h1>
-      <div
+      {/* <div
         style={{
           display: "flex",
           justifyContent: "space-evenly",
@@ -135,7 +135,7 @@ export default function Home() {
           setVisible={setVisible}
           hoverable={true}
         />
-      </div>
+      </div> */}
       <div
         style={{
           display: "flex",
@@ -145,7 +145,7 @@ export default function Home() {
           marginTop: "35%",
         }}
       >
-        <HiveGroup cells={cells} />
+        <HiveGroup cells={cells} dimension={20} />
       </div>
     </div>
   );
