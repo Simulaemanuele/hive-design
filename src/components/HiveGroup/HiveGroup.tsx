@@ -101,11 +101,15 @@ const HiveGroup: React.FC<HiveGroupProps> = ({
       </div>
       {orbitingComponents.map((component, index) => {
         const { x, y } = positions[index] || { x: 0, y: 0 };
+
+        console.log("PROPS: ", component.props);
         return (
           <div
             key={index}
-            className="surrounding item"
-            style={{ transform: `translate(${x}px, ${y}px)` }}
+            className="surrounding"
+            style={{
+              transform: `translate(${x}px, ${y}px)`,
+            }}
           >
             {React.cloneElement(component, { dimension })}
           </div>
