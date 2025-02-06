@@ -32,85 +32,61 @@ const HiveGroup: React.FC<HiveGroupProps> = ({
   const orbitingComponents = cells.slice(1);
   const scaleFactor = dimension / 20;
 
+  const distanceLookup: Record<number, number> = {
+    20: 220,
+    19: 218,
+    18: 216,
+    17: 215,
+    16: 213,
+    15: 211,
+    14: 209,
+    13: 207,
+    12: 204,
+    11: 201,
+    10: 197,
+    9: 190,
+    8: 184,
+    7: 177,
+    6: 165,
+    5: 148,
+    4: 109,
+    3: 50,
+    2: 50,
+    1: 50,
+  };
+
   const distanceSizing = (dimension: number): number => {
-    let distance: number;
-    switch (dimension) {
-      case 20:
-      case 18:
-      case 17:
-        distance = 216;
-        break;
-      case 16:
-        distance = 215;
-        break;
-      case 15:
-        distance = 201;
-        break;
-      case 14:
-        distance = 197;
-        break;
-      case 13:
-        distance = 194;
-        break;
-      case 12:
-        distance = 192;
-        break;
-      case 11:
-        distance = 186;
-        break;
-      case 10:
-        distance = 180;
-        break;
-      default:
-        distance = 180;
-        break;
-    }
-    return distance;
+    if (distanceLookup[dimension]) return distanceLookup[dimension];
+
+    const dims = Object.keys(distanceLookup)
+      .map(Number)
+      .sort((a, b) => b - a);
+
+    const lowerDim = dims.find((d) => d < dimension) || 1;
+    const upperDim = dims.find((d) => d > dimension) || 20;
+
+    const lowerDist = distanceLookup[lowerDim];
+    const upperDist = distanceLookup[upperDim];
+
+    const ratio = (dimension - lowerDim) / (upperDim - lowerDim);
+    return lowerDist + (upperDist - lowerDist) * ratio;
   };
 
   const distance = distanceSizing(dimension);
 
-  const positions = [
-    {
-      x: distance * scaleFactor * (1 - 33.95 / 100),
-      y: distance * scaleFactor * (1 - 215 / 100),
-    }, // Top-Right
-    { x: distance * scaleFactor * 1.337, y: 0 }, // Right
-    {
-      x: distance * scaleFactor * (1 - 33 / 100),
-      y: -distance * scaleFactor * (1 - 215 / 100),
-    }, // Bottom-Right
-    {
-      x: -distance * scaleFactor * (1 - 33 / 100),
-      y: -distance * scaleFactor * (1 - 215 / 100),
-    }, // Bottom-Left
-    { x: -distance * scaleFactor * 1.337, y: 0 }, // Left
-    {
-      x: -distance * scaleFactor * (1 - 33.95 / 100),
-      y: distance * scaleFactor * (1 - 215 / 100),
-    }, // Top-Left
-  ];
+  const getPosition = (xFactor: number, yFactor: number) => ({
+    x: distance * scaleFactor * xFactor,
+    y: distance * scaleFactor * yFactor,
+  });
 
-  // const positions = [
-  //   {
-  //     x: pxToRem(distance * (1 - 33.95 / 100)),
-  //     y: pxToRem(distance * (1 - 215 / 100)),
-  //   }, // Top-Right
-  //   { x: pxToRem(distance * 1.337), y: "0" }, // Right
-  //   {
-  //     x: pxToRem(distance * (1 - 33 / 100)),
-  //     y: pxToRem(-distance * (1 - 215 / 100)),
-  //   }, // Bottom-Right
-  //   {
-  //     x: pxToRem(-distance * (1 - 33 / 100)),
-  //     y: pxToRem(-distance * (1 - 215 / 100)),
-  //   }, // Bottom-Left
-  //   { x: pxToRem(-distance * 1.337), y: "0" }, // Left
-  //   {
-  //     x: pxToRem(-distance * (1 - 33.95 / 100)),
-  //     y: pxToRem(distance * (1 - 215 / 100)),
-  //   }, // Top-Left
-  // ];
+  const positions = [
+    getPosition(1 - 0.3395, 1 - 2.15),
+    getPosition(1.337, 0),
+    getPosition(1 - 0.33, -1 + 2.15),
+    getPosition(-1 + 0.33, -1 + 2.15),
+    getPosition(-1.337, 0),
+    getPosition(-1 + 0.3395, 1 - 2.15),
+  ];
 
   return (
     <div
@@ -124,7 +100,7 @@ const HiveGroup: React.FC<HiveGroupProps> = ({
         {React.cloneElement(centralComponent, { dimension })}
       </div>
       {orbitingComponents.map((component, index) => {
-        const { x, y } = positions[index];
+        const { x, y } = positions[index] || { x: 0, y: 0 };
         return (
           <div
             key={index}

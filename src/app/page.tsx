@@ -3,10 +3,16 @@
 import HiveCell from "@/components/HiveCell/HiveCell";
 import HiveGroup from "@/components/HiveGroup/HiveGroup";
 import { getDisplayName } from "next/dist/shared/lib/utils";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 export default function Home() {
   const [visible, setVisible] = useState<boolean>(true);
+  const [dimension, setDimension] = useState<number>(1);
+  const [pivotValue, setPivotValue] = useState<number>(0);
+
+  useEffect(() => {
+    setDimension(20);
+  }, []);
 
   const cells = [
     <HiveCell
@@ -68,7 +74,8 @@ export default function Home() {
         display: "flex",
         flexDirection: "column",
         justifyContent: "space-between",
-        height: "100%",
+        alignItems: "center",
+        height: "200vh",
       }}
     >
       <h1
@@ -76,6 +83,26 @@ export default function Home() {
       >
         Design System
       </h1>
+      <div>
+        <input
+          type="text"
+          onChange={(e) => setPivotValue(Number(e.target.value))}
+          placeholder="Type value here..."
+          style={{ border: "1px solid gray", borderRadius: 10 }}
+        />
+        <button
+          style={{
+            border: "1px solid black",
+            borderRadius: 10,
+            backgroundColor: "lightGray",
+            marginLeft: 4,
+            padding: 2,
+          }}
+          onClick={() => setDimension(pivotValue)}
+        >
+          Change
+        </button>
+      </div>
       {/* <div
         style={{
           display: "flex",
@@ -140,12 +167,12 @@ export default function Home() {
         style={{
           display: "flex",
           flexDirection: "column",
-          justifyContent: "flex-end",
+          justifyContent: "space-between",
           alignItems: "center",
-          marginTop: "35%",
+          // marginTop: "35%",
         }}
       >
-        <HiveGroup cells={cells} dimension={20} />
+        <HiveGroup cells={cells} dimension={dimension} />
       </div>
     </div>
   );
